@@ -1,0 +1,280 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  color: #1a1a2e;
+  background: #f0f2f5;
+}
+
+.container {
+  padding: 16px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.section {
+  margin-bottom: 14px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.input-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+  background: #fff;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #4a90d9;
+  box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.15);
+}
+
+input[readonly] {
+  background: #f5f5f5;
+  color: #333;
+}
+
+input[type="number"] {
+  text-align: center;
+}
+
+.sep {
+  color: #999;
+  font-weight: 500;
+}
+
+.btn-icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.btn-icon:hover {
+  background: #e8e8e8;
+}
+
+.hint {
+  font-size: 11px;
+  color: #999;
+  margin-top: 3px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 0;
+}
+
+.checkbox-item input[type="checkbox"] {
+  accent-color: #4a90d9;
+}
+
+textarea {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 11px;
+  font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+  outline: none;
+  resize: vertical;
+  background: #fff;
+  line-height: 1.6;
+}
+
+textarea:focus {
+  border-color: #4a90d9;
+  box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.15);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #4a90d9;
+  cursor: pointer;
+  font-size: 11px;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.btn-link:hover {
+  color: #357abd;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  background: #1a1a2e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover {
+  background: #2d2d44;
+}
+
+.btn-primary:active {
+  background: #0f0f1a;
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-sm:hover {
+  background: #f0f0f0;
+  border-color: #bbb;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.result-actions {
+  display: flex;
+  gap: 4px;
+}
+
+#resultOutput {
+  background: #fafafa;
+  font-size: 11px;
+  color: #333;
+}
+
+#resultCount {
+  color: #4a90d9;
+  font-weight: 700;
+}
+
+/* Collapsible sections (details/summary) */
+.collapsible-section {
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.collapsible-summary {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  padding: 8px 10px;
+  background: #f8f8f8;
+  user-select: none;
+  list-style: none;
+  transition: background 0.15s;
+}
+
+.collapsible-summary::-webkit-details-marker {
+  display: none;
+}
+
+.collapsible-summary::before {
+  content: '\25B6  ';
+  font-size: 9px;
+  color: #999;
+}
+
+.collapsible-section[open] .collapsible-summary::before {
+  content: '\25BC  ';
+}
+
+.collapsible-summary:hover {
+  background: #eee;
+}
+
+.collapsible-section[open] .collapsible-summary {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.details-content {
+  padding: 10px;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  margin-top: 12px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 11px;
+  color: #999;
+}
+
+.footer a {
+  color: #4a90d9;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

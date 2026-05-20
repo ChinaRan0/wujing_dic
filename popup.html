@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>弱口令字典生成器</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">无境剑-弱口令字典生成器</h1>
+
+    <!-- 域名区域 -->
+    <div class="section">
+      <label class="label">当前域名</label>
+      <div class="input-row">
+        <input type="text" id="domainInput" placeholder="自动获取当前域名..." readonly>
+        <button id="refreshDomainBtn" class="btn-icon" title="刷新域名">&#x21bb;</button>
+      </div>
+      <div class="hint" id="domainHint"></div>
+    </div>
+
+    <!-- 自定义关键字 -->
+    <div class="section">
+      <label class="label">自定义关键字（多个用逗号分隔）</label>
+      <input type="text" id="keywordInput" placeholder="例如：阿里巴巴,alibaba,linyi">
+      <div class="hint">中文自动转为拼音，英文保持不变(测试中)</div>
+    </div>
+
+    <!-- 生成选项 -->
+    <div class="section">
+      <label class="label">生成模式</label>
+      <div class="checkbox-group">
+        <label class="checkbox-item">
+          <input type="checkbox" id="optYearLower" checked>
+          <span>{data}@年份（小写）</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="optYearCapital" checked>
+          <span>{Data}@年份（首字母大写）</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="optSuffix" checked>
+          <span>{data}@常见后缀</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="optMultiSep" checked>
+          <span>{data}#YYYY 多分隔符</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="optNoSep" checked>
+          <span>{data}YYYY 无分隔符</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="optUppercase" checked>
+          <span>全大写 {DATA}（作用于已选规则）</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="optAccountPrefix" checked>
+          <span>admin@{data} 账号前缀</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="optReverse" checked>
+          <span>YYYY@{data} 反转顺序</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="optEnterprise" checked>
+          <span>{data}@123.com 企业后缀</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- 常见后缀编辑 -->
+    <div class="section">
+      <label class="label">
+        常见后缀列表（每行一个）
+        <button id="resetSuffixBtn" class="btn-link">恢复默认</button>
+      </label>
+      <textarea id="suffixList" rows="8"></textarea>
+    </div>
+
+    <!-- 无分隔符后缀（折叠） -->
+    <details class="section collapsible-section" id="noSepDetails">
+      <summary class="collapsible-summary">无分隔符后缀列表</summary>
+      <div class="details-content">
+        <label class="label">
+          每行一个（直接拼接在{data}后）
+          <button id="resetNoSepBtn" class="btn-link" type="button">恢复默认</button>
+        </label>
+        <textarea id="noSepSuffixList" rows="6"></textarea>
+      </div>
+    </details>
+
+    <!-- 账号前缀（折叠） -->
+    <details class="section collapsible-section" id="accountDetails">
+      <summary class="collapsible-summary">账号前缀列表</summary>
+      <div class="details-content">
+        <label class="label">
+          每行一个（生成 账号@{data}）
+          <button id="resetAccountBtn" class="btn-link" type="button">恢复默认</button>
+        </label>
+        <textarea id="accountPrefixList" rows="4"></textarea>
+      </div>
+    </details>
+
+    <!-- 企业后缀（折叠） -->
+    <details class="section collapsible-section" id="enterpriseDetails">
+      <summary class="collapsible-summary">企业后缀列表</summary>
+      <div class="details-content">
+        <label class="label">
+          每行一个（含自带分隔符，如 @123.com）
+          <button id="resetEnterpriseBtn" class="btn-link" type="button">恢复默认</button>
+        </label>
+        <textarea id="enterpriseSuffixList" rows="5"></textarea>
+      </div>
+    </details>
+
+    <!-- 年份范围 -->
+    <div class="section">
+      <label class="label">年份范围</label>
+      <div class="input-row">
+        <input type="number" id="yearStart" value="2010" min="2000" max="2099">
+        <span class="sep">—</span>
+        <input type="number" id="yearEnd" value="2026" min="2000" max="2099">
+      </div>
+    </div>
+
+    <!-- 生成按钮 -->
+    <button id="generateBtn" class="btn-primary">生成字典</button>
+
+    <!-- 结果区域 -->
+    <div class="section" id="resultSection" style="display:none;">
+      <div class="result-header">
+        <label class="label">生成结果（<span id="resultCount">0</span> 条）</label>
+        <div class="result-actions">
+          <button id="copyBtn" class="btn-sm">复制全部</button>
+          <button id="downloadBtn" class="btn-sm">下载 TXT</button>
+        </div>
+      </div>
+      <textarea id="resultOutput" rows="12" readonly placeholder="点击"生成字典"按钮..."></textarea>
+    </div>
+
+    <!-- 版权信息 -->
+    <div class="footer">
+      <span>无境剑-弱口令字典生成器</span>
+      <a href="https://github.com/chinaran0/wujing_dic" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <script src="pinyin.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

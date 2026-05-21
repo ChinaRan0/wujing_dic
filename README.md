@@ -2,6 +2,10 @@
 
 Chrome 浏览器插件，基于域名和自定义关键字自动生成企业弱口令字典，用于授权的渗透测试和安全评估。
 
+<img width="465" height="650" alt="image" src="https://github.com/user-attachments/assets/d27a02c8-d4a5-49e6-843b-4d295f6c52db" />
+
+
+
 ## 安装
 
 1. 下载或克隆本项目
